@@ -1,0 +1,213 @@
+
+openapi: 3.0.0
+info:
+  title: Job Portal API - User Endpoints
+  version: 1.0.0
+  description: User-related endpoints for the Job Portal API
+servers:
+  - url: http://localhost:5000
+    description: Development server
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+paths:
+  /api/user/auth/login:
+    post:
+      summary: User login
+      tags:
+        - User
+      operationId: loginUser
+      description: Authenticates a user and returns a JWT token (handled by auth.controller.ts)
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  example: test@example.com
+                password:
+                  type: string
+                  example: password123
+              required:
+                - email
+                - password
+      responses:
+        '200':
+          description: Login successful
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  token:
+                    type: string
+                    example: eyJhbGciOiJIUzI1NiIs...
+        '401':
+          description: Invalid credentials
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Invalid credentials
+  /api/user/auth/register:
+    post:
+      summary: Register a new user
+      tags:
+        - User
+      operationId: registerUser
+      description: Creates a new user account (handled by auth.controller.ts)
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  example: newuser@example.com
+                password:
+                  type: string
+                  example: password123
+                name:
+                  type: string
+                  example: John Doe
+              required:
+                - email
+                - password
+                - name
+      responses:
+        '201':
+          description: User registered successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: User registered successfully
+                  user:
+                    type: object
+                    properties:
+                      email:
+                        type: string
+                      name:
+                        type: string
+        '400':
+          description: Validation error or user already exists
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: User already exists
+  /api/user/jobs:
+    get:
+      summary: Get all jobs
+      tags:
+        - User
+      operationId: getJobs
+      description: Retrieves a list of all job postings for users (handled by job.controller.ts)
+      responses:
+        '200':
+          description: List of jobs
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: string
+                    title:
+                      type: string
+                    company:
+                      type: string
+                    location:
+                      type: string
+                    description:
+                      type: string
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Internal server error
+  /api/user/resume:
+    post:
+      summary: Upload a resume
+      tags:
+        - User
+      operationId: uploadResume
+      description: Uploads a PDF resume for a user (handled by resume.controller.ts, requires authMiddleware)
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                resume:
+                  type: string
+                  format: binary
+              required:
+                - resume
+      responses:
+        '201':
+          description: Resume uploaded successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Resume uploaded successfully
+                  resume:
+                    type: object
+                    properties:
+                      userId:
+                        type: string
+                      fileName:
+                        type: string
+                      filePath:
+                        type: string
+        '400':
+          description: Invalid file type or size
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Invalid file type. Only PDF files are allowed
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Unauthorized

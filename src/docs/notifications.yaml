@@ -1,0 +1,185 @@
+paths:
+  /api/emails/send-email:
+    post:
+      summary: Send an immediate email
+      description: Enqueues an email to be sent immediately via the email queue.
+      tags:
+        - Notifications
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - email
+                - subject
+                - message
+              properties:
+                email:
+                  type: string
+                  format: email
+                  example: user@example.com
+                subject:
+                  type: string
+                  example: Welcome to Job Portal
+                message:
+                  type: string
+                  example: Thank you for registering!
+      responses:
+        '200':
+          description: Email enqueued successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Email enqueued successfully
+        '400':
+          description: Bad request (missing or invalid fields)
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                  message:
+                    type: string
+        '500':
+          description: Server error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                  message:
+                    type: string
+  /api/emails/schedule-email:
+    post:
+      summary: Schedule an email
+      description: Enqueues an email to be sent at a specified future time via the scheduler queue.
+      tags:
+        - Notifications
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - email
+                - subject
+                - message
+                - scheduledAt
+              properties:
+                email:
+                  type: string
+                  format: email
+                  example: user@example.com
+                subject:
+                  type: string
+                  example: Meeting Reminder
+                message:
+                  type: string
+                  example: Your meeting is tomorrow!
+                scheduledAt:
+                  type: string
+                  format: date-time
+                  example: 2025-04-22T10:00:00Z
+      responses:
+        '200':
+          description: Scheduled email enqueued successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Scheduled email enqueued successfully
+        '400':
+          description: Bad request (missing or invalid fields)
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                  message:
+                    type: string
+        '500':
+          description: Server error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                  message:
+                    type: string
+  /api/notifications/send-notification:
+    post:
+      summary: Send a notification
+      description: Enqueues a notification for a user via the notification queue.
+      tags:
+        - Notifications
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - userId
+                - title
+                - content
+              properties:
+                userId:
+                  type: string
+                  example: 123
+                title:
+                  type: string
+                  example: New Job Posted
+                content:
+                  type: string
+                  example: A new job matching your profile is available!
+      responses:
+        '200':
+          description: Notification enqueued successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Notification enqueued successfully
+        '400':
+          description: Bad request (missing or invalid fields)
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                  message:
+                    type: string
+        '500':
+          description: Server error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                  message:
+                    type: string

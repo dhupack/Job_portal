@@ -1,0 +1,7 @@
+.env
+.DS_Store
+package-lock.json
+logs
+public/resumes
+
+node_modules/

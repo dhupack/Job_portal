@@ -1,0 +1,308 @@
+
+
+openapi: 3.0.0
+info:
+  title: Job Portal API - Admin Endpoints
+  version: 1.0.0
+  description: Admin-related endpoints for the Job Portal API
+servers:
+  - url: http://localhost:5000
+    description: Development server
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+paths:
+  /api/admin/auth/login:
+    post:
+      summary: Admin login
+      tags:
+        - Admin
+      operationId: loginAdmin
+      description: Authenticates an admin and returns a JWT token (handled by auth.controller.ts)
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  example: admin@example.com
+                password:
+                  type: string
+                  example: admin123
+              required:
+                - email
+                - password
+      responses:
+        '200':
+          description: Login successful
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  token:
+                    type: string
+                    example: eyJhbGciOiJIUzI1NiIs...
+        '401':
+          description: Invalid credentials
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Invalid credentials
+
+  /api/admin/auth/signup:
+    post:
+      summary: Admin signup
+      tags:
+        - Admin
+      operationId: signupAdmin
+      description: Registers a new admin (handled by auth.controller.ts)
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  example: John Doe
+                email:
+                  type: string
+                  example: admin@example.com
+                password:
+                  type: string
+                  example: strongPassword123
+                type:
+                  type: string
+                  enum: [admin]
+                  example: admin
+              required:
+                - name
+                - email
+                - password
+                - type
+      responses:
+        '201':
+          description: Admin created successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Admin registered successfully
+        '400':
+          description: Validation error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Email already exists
+
+  /api/admin/jobs:
+    post:
+      summary: Create a new job
+      tags:
+        - Admin
+      operationId: createJob
+      description: Creates a new job posting (handled by job.controller.ts, requires adminAuth)
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+                  example: Software Engineer
+                company:
+                  type: string
+                  example: Tech Corp
+                location:
+                  type: string
+                  example: New York
+                description:
+                  type: string
+                  example: Develop web applications
+              required:
+                - title
+                - company
+                - location
+                - description
+      responses:
+        '201':
+          description: Job created successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Job created successfully
+                  job:
+                    type: object
+                    properties:
+                      id:
+                        type: string
+                      title:
+                        type: string
+                      company:
+                        type: string
+                      location:
+                        type: string
+                      description:
+                        type: string
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Unauthorized
+        '400':
+          description: Validation error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Title too short
+
+  /api/admin/jobs/{id}:
+    delete:
+      summary: Delete a job
+      tags:
+        - Admin
+      operationId: deleteJob
+      description: Deletes a job posting by ID (handled by job.controller.ts, requires adminAuth)
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+          description: Job ID
+      responses:
+        '200':
+          description: Job deleted successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Job deleted successfully
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Unauthorized
+        '404':
+          description: Job not found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Job not found
+    /api/admin/interviews:
+    post:
+      summary: Schedule an interview
+      tags:
+        - Admin
+      operationId: scheduleInterview
+      description: Schedules an interview for a specific application (handled by interview.controller.ts, requires adminAuth)
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                applicationId:
+                  type: string
+                  example: 644fcfc9e95f313554c20f79
+                date:
+                  type: string
+                  format: date
+                  example: 2025-05-01
+                time:
+                  type: string
+                  pattern: '^([01]\d|2[0-3]):([0-5]\d)$'
+                  example: "10:30"
+              required:
+                - applicationId
+                - date
+                - time
+      responses:
+        '201':
+          description: Interview scheduled successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Interview scheduled successfully
+                  interview:
+                    type: object
+                    properties:
+                      id:
+                        type: string
+                      applicationId:
+                        type: string
+                      date:
+                        type: string
+                        format: date
+                      time:
+                        type: string
+                        example: "10:30"
+                      scheduledBy:
+                        type: string
+        '400':
+          description: Invalid input
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Missing required fields
