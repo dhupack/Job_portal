@@ -1,6 +1,7 @@
 import Joi from 'joi';
 import { sharedSchemas } from './sharedSchemas';
 
+
 export const createJobSchema = Joi.object({
   title: Joi.string().required(),
   description: Joi.string().required(),
