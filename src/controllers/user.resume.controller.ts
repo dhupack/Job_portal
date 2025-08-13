@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 import { HTTP_CODES } from '../utils/httpCodes';
 import { ErrorMessages } from '../utils/errorMessage';
-import { resumeService } from '/home/user/job_PORTAL/src/Services/user.resume.service';
+import { resumeService } from '../Services/user.resume.service';
 import Resume from '../models/user.Resume';
 import { logger } from '../utils/logger';
 

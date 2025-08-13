@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { notificationService } from '/home/user/job_PORTAL/src/Notifications /notification.service';
+import { notificationService } from '../Notifications/notification.service';
 import { HTTP_CODES } from '../utils/httpCodes';
 import { ErrorMessages } from '../utils/errorMessage';
 

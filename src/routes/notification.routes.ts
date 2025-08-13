@@ -1,8 +1,8 @@
 import { Router, Request, Response } from 'express';
-import { HTTP_CODES } from '/home/user/job_PORTAL/src/utils/httpCodes';
-import { ErrorMessages } from '/home/user/job_PORTAL/src/utils/errorMessage';
-import { queueService } from '../Notifications /queue.service';
-import { logger } from '/home/user/job_PORTAL/src/utils/logger';
+import { HTTP_CODES } from '../utils/httpCodes';
+import { ErrorMessages } from '../utils/errorMessage';
+import { queueService } from '../Notifications/queue.service';
+import { logger } from '../utils/logger';
 
 const router = Router();
 
@@ -36,3 +36,4 @@ router.post('/send-notification', async (
 });
 
 export default router;
+

@@ -4,6 +4,7 @@ import {logger} from '../utils/logger';
 
 export const connectDB = async() :Promise<void>=>{
 try {
+	console.log(ENV.MONGO_URI)
 	await mongoose.connect(ENV.MONGO_URI);
 	logger.info('Mongodb connected Succesfully ');
 }

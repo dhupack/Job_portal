@@ -2,7 +2,7 @@ import { Request, Response } from 'express';
 import { HTTP_CODES } from '../utils/httpCodes';
 import { ErrorMessages  } from '../utils/errorMessage'; 
 import { authService } from '../Services/admin.auth.services';
-import { generateToken } from '/home/user/job_PORTAL/src/utils/helper';
+import { generateToken } from '../utils/helper';
 
 export const signup = async (req: Request, res: Response): Promise<void> => {
   const { email, password, name } = req.body;

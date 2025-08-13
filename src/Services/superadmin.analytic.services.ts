@@ -1,4 +1,4 @@
-import { cacheService } from '/home/user/job_PORTAL/src/queueservices/cache.service';
+import { cacheService } from '../queueservices/cache.service';
 import {User }from '../models/user';
 import Admin from '../models/Admin';
 import Job from '../models/admin.Job';

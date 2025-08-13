@@ -1,12 +1,12 @@
 
 import { ErrorMessages  } from '../utils/errorMessage';
-import { cacheService } from '/home/user/job_PORTAL/src/queueservices/cache.service';
-import { queueService } from '/home/user/job_PORTAL/src/Notifications /queue.service';
-import Job from '/home/user/job_PORTAL/src/models/admin.Job';
+import { cacheService } from '../queueservices/cache.service';
+import { queueService } from '../Notifications/queue.service';
+import Job from '../models/admin.Job';
 import Application from '../models/user.Application';
 import Resume from '../models/user.Resume';
 import {User} from '../models/user';
-import { emailService } from '/home/user/job_PORTAL/src/Notifications /emailService';
+import { emailService } from '../Notifications/emailService';
 
 export const jobService = {
   getJobs: async (): Promise<any[]> => {

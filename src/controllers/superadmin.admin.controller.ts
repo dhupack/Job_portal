@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 import { HTTP_CODES } from '../utils/httpCodes';
 import { ErrorMessages  } from '../utils/errorMessage';
-import { adminService } from '/home/user/job_PORTAL/src/Services/superadmin.admin.services';
+import { adminService } from '../Services/superadmin.admin.services';
 import { generateToken } from '../utils/helper';
 
 export const listAdmins = async (req: Request, res: Response): Promise<void> => {

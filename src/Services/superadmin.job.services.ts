@@ -1,6 +1,6 @@
 // import { HTTP_CODES } from '../../../utils/httpCodes';
 import { ErrorMessages  } from '../utils/errorMessage';
-import { cacheService } from '/home/user/job_PORTAL/src/queueservices/cache.service';
+import { cacheService } from '../queueservices/cache.service';
 import Job from '../models/admin.Job';
 
 export const jobService = {

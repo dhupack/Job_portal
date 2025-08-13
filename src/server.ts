@@ -6,12 +6,16 @@ import { connectDB } from './config/database';
 import { connectRabbitMQ } from './config/rabbitmq';
 import { connectRedis } from './config/redis';
 import { setupSwagger } from './config/swagger';
+import dotenv from 'dotenv';
+dotenv.config({path: './.env'});
+
 const PORT = process.env.PORT || 3000;
 
 const startServer = async (): Promise<void> => {
   try {
+    console.log(`Connecting to: "${process.env.MONGO_URI}"`);
     await connectDB();
-    
+    console.log('hey');
   
     await connectRabbitMQ();
    

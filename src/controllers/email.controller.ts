@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { emailService } from '/home/user/job_PORTAL/src/Notifications /emailService';
+import { emailService } from '../Notifications/emailService';
 import { HTTP_CODES } from '../utils/httpCodes';
 import { ErrorMessages } from '../utils/errorMessage';
 

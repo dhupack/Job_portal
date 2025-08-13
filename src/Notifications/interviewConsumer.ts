@@ -1,4 +1,4 @@
-import { queueService } from "../Notifications /queue.service";
+import { queueService } from "../Notifications/queue.service";
 import { logger } from "../utils/logger";
 
 export const startInterviewScheduler = async() :Promise<void> =>{

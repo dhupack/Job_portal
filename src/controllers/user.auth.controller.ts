@@ -2,7 +2,7 @@
 import { Request, Response } from 'express';
 import { HTTP_CODES } from '../utils/httpCodes';
 import { ErrorMessages  } from '../utils/errorMessage';
-import { authService } from '/home/user/job_PORTAL/src/Services/user.auth.service';
+import { authService } from '../Services/user.auth.service';
 import { generateToken } from '../utils/helper';
 import  {User}  from '../models/user'; 
 
@@ -40,3 +40,4 @@ export const login = async (req: Request, res: Response): Promise<void> => {
     res.status(HTTP_CODES.UNAUTHORIZED).json({ message: error.message });
   }
 };
+

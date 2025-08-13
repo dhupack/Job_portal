@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 import { HTTP_CODES } from '../utils/httpCodes';
 import { ErrorMessages  } from '../utils/errorMessage';
-import { userService } from '/home/user/job_PORTAL/src/Services/superadmin.user.services';
+import { userService } from '../Services/superadmin.user.services';
 
 export const listUsers = async (req: Request, res: Response): Promise<void> => {
   try {

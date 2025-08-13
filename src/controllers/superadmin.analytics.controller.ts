@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 import { HTTP_CODES } from '../utils/httpCodes';
 import { ErrorMessages  } from '../utils/errorMessage';;
-import { analyticsService } from '/home/user/job_PORTAL/src/Services/superadmin.analytic.services';
+import { analyticsService } from '../Services/superadmin.analytic.services';
 
 export const getAnalytics = async (req: Request, res: Response): Promise<void> => {
   try {

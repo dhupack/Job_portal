@@ -2,19 +2,19 @@
 import express, { Application } from 'express';
 import swaggerUi from 'swagger-ui-express';
 import swaggerSpec from './config/swagger';
-import userAuthRoutes from '/home/user/job_PORTAL/src/routes/user.auth.routes';
-import userJobRoutes from '/home/user/job_PORTAL/src/routes/user.job.routes';
-import userResumeRoutes from '/home/user/job_PORTAL/src/routes/user.resume.routes';
-import adminAuthRoutes from '/home/user/job_PORTAL/src/routes/admin.auth.routes';
-import adminJobRoutes from '/home/user/job_PORTAL/src/routes/admin.job.routes';
-import adminInterviewRoutes from '/home/user/job_PORTAL/src/routes/admin.interview.routes';
-import superAdminUserRoutes from '/home/user/job_PORTAL/src/routes/user.routes';
+import userAuthRoutes from '../src/routes/user.auth.routes';
+import userJobRoutes from '../src/routes/user.job.routes';
+import userResumeRoutes from '../src/routes/user.resume.routes';
+import adminAuthRoutes from '../src/routes/admin.auth.routes';
+import adminJobRoutes from '../src/routes/admin.job.routes';
+import adminInterviewRoutes from '../src/routes/admin.interview.routes';
+import superAdminUserRoutes from './routes/user.routes';
 import superAdminAdminRoutes from './routes/superadmin.routes';
-import superAdminJobRoutes from '/home/user/job_PORTAL/src/routes/superadmin.job.routes';
-import superAdminAnalyticsRoutes from '/home/user/job_PORTAL/src/routes/superadmin.report.routes';
-import superAdminReportRoutes from '/home/user/job_PORTAL/src/routes/superadmin.report.routes';
+import superAdminJobRoutes from './routes/superadmin.job.routes';
+import superAdminAnalyticsRoutes from './routes/superadmin.report.routes';
+import superAdminReportRoutes from './routes/superadmin.report.routes';
 import superAdminAuthRoutes from './routes/superadmin.routes';
-import emailRoutes from '/home/user/job_PORTAL/src/routes/email.routes';
+import emailRoutes from '../src/routes/email.routes'
 import notificationRoutes from './routes/notification.routes'; 
 import { errorHandler } from './middleware/errorHandler';
 

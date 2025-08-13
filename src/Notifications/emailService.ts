@@ -1,7 +1,7 @@
 
-import { queueService } from '../Notifications /queue.service';
+import { queueService } from '../Notifications/queue.service';
 import { logger } from '../utils/logger';
-import { ErrorMessages } from '/home/user/job_PORTAL/src/utils/errorMessage';
+import { ErrorMessages } from '../utils/errorMessage';
 
 const emailService = {
   sendEmailToQueue: async ({ subject, recipient, body }: { subject: string; recipient: string; body: string }) => {

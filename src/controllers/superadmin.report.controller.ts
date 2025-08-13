@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 import { HTTP_CODES } from '../utils/httpCodes';
 import { ErrorMessages  } from '../utils/errorMessage';
-import { reportService } from '/home/user/job_PORTAL/src/Services/superadmin.report.services';
+import { reportService } from '../Services/superadmin.report.services';
 
 export const generateUserActivityReport = async (req: Request, res: Response): Promise<void> => {
   const superAdminId = req.user?.id;

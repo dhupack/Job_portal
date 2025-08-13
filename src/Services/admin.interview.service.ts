@@ -1,6 +1,6 @@
 
 import { ErrorMessages } from '../utils/errorMessage';
-import { queueService } from '../Notifications /queue.service'; 
+import { queueService } from '../Notifications/queue.service'; 
 import Interview from '../models/admin.Interview';
 import Application from '../models/user.Application';
 import { User } from '../models/user';
